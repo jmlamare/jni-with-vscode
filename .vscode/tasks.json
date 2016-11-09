@@ -1,0 +1,61 @@
+// https://code.visualstudio.com/docs/editor/debugging#_variable-substitution
+{
+    "version": "0.1.0",
+    "linux": {
+        "command": "bash",
+        "args": ["-c"],
+        "isShellCommand": true,
+        "showOutput": "always",
+        "echoCommand": true,
+        "suppressTaskName": true,
+        "options": {
+            "cwd": "${workspaceRoot}"
+        },
+        "tasks": [
+            {
+                "taskName": "cpp",
+                "isBuildCommand": true,
+                "args": [
+                    "g++ -g -I${env.JAVA_HOME}/include -I${env.JAVA_HOME}/include/linux -L$JAVA_HOME/{,jre/}lib{,/amd64}{,/server} Sample.cpp -ljvm -o Sample"
+                ],
+                "problemMatcher": {
+                    "owner": "cpp",
+                    "fileLocation": [
+                        "relative",
+                        "${workspaceRoot}"
+                    ],
+                    "pattern": {
+                        "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "severity": 4,
+                        "message": 5
+                    }
+                }
+            },
+            {
+                "taskName": "java",
+                "isBuildCommand": true,
+                "args": [
+                    "javac Sample.java"
+                ],
+                "problemMatcher": {
+                    "owner": "java",
+                    "fileLocation": [
+                        "relative",
+                        "${workspaceRoot}"
+                    ],
+                    "pattern": {
+                        "regexp": "^(.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "severity": 3,
+                        "message": 4
+                    }
+                }
+            }
+        ]
+    }
+
+}

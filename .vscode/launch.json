@@ -1,0 +1,45 @@
+// https://github.com/Microsoft/vscode-cpptools/blob/master/launch.md
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Instance",
+            "internalConsoleOptions": "openOnSessionStart",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/Sample",
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "stopAtEntry": true,
+            "externalConsole": false,
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "/home/jlamare/.local/bin/gdb",
+                "setupCommands": [
+                    {
+                        "text": "handle SIGSEGV nostop noprint pass"
+                    }
+                ],
+                "externalConsole": true,
+                "cwd": "${workspaceRoot}",
+                "environment": [
+                    {
+                        "name": "LD_LIBRARY_PATH",
+                        "value": "${env.JAVA_HOME}/jre/lib/amd64/server:${env.LD_LIBRARY_PATH}"
+                    }, 
+                    {
+                        "name": "JAVA_HOME",
+                        "value": "${env.JAVA_HOME}"
+                    }
+                ]
+            },
+            "osx": {
+                "MIMode": "lldb"
+            },
+            "windows": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
+            }
+        }
+    ]
+}
